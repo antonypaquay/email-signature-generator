@@ -23,12 +23,14 @@ class App extends Component {
     const getPhone = localStorage.getItem('phone');
     const getGenerateEmail = localStorage.getItem('generatedEmail');
 
+    console.log(getPhone);
+
     if (getGenerateEmail) {
       this.setState({
-        firstName: getFirstName,
-        lastName: getLastName,
-        position: getPosition,
-        phone: getPhone,
+        firstName: getFirstName !== null ? getFirstName : this.state.firstName,
+        lastName: getLastName !== null ? getLastName : this.state.lastName,
+        position: getPosition !== null ? getPosition : this.state.position,
+        phone: getPhone !== null ? getPhone : this.state.phone,
         generatedEmail: getGenerateEmail
       })
     }
@@ -37,22 +39,33 @@ class App extends Component {
   onChange(e) {
     const fieldText = e.target.value;
     const fieldId = e.target.id;
-    if (fieldId === 'firstName') {
-      this.setState({
-        firstName: fieldText
-      })
-    } else if (fieldId === 'lastName') {
-      this.setState({
-        lastName: fieldText
-      })
-    } else if (fieldId === 'position') {
-      this.setState({
-        position: fieldText
-      })
-    } else {
-      this.setState({
-        phone: fieldText
-      })
+
+    switch(fieldId) {
+      case 'firstName':
+        this.setState({
+          firstName: fieldText
+        })
+        break;
+      case 'lastName':
+        this.setState({
+          lastName: fieldText
+        })
+        break;
+      case 'position': 
+        this.setState({
+          position: fieldText
+        })
+        break;
+      case 'phone': 
+        this.setState({
+          phone: fieldText
+        })
+        break;
+      default:
+        this.setState({
+          phone: fieldText
+        })
+        break;
     }
     localStorage.setItem(fieldId, fieldText);
   }
