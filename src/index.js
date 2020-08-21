@@ -99,7 +99,7 @@ class App extends Component {
               </div>
               <div className="form__elt">
                 <label htmlFor="phone">Phone number *</label>
-                <input require="true" onChange={(e) => { this.onChange(e) }} type="tel" id="phone" placeholder="0032456789123" />
+                <input require="true" onChange={(e) => { this.onChange(e) }} type="tel" id="phone" placeholder="+32456789123" />
               </div>
             </form>
 
