@@ -23,8 +23,6 @@ class App extends Component {
     const getPhone = localStorage.getItem('phone');
     const getGenerateEmail = localStorage.getItem('generatedEmail');
 
-    console.log(getPhone);
-
     if (getGenerateEmail) {
       this.setState({
         firstName: getFirstName !== null ? getFirstName : this.state.firstName,
