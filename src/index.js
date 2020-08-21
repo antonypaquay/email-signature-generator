@@ -78,6 +78,7 @@ class App extends Component {
   }
 
   render() {
+    const {firstName, lastName, position, phone} = this.state;
     return (
       <Fragment>
         <div className="container">
@@ -87,7 +88,7 @@ class App extends Component {
             <form autoComplete="off" onChange={() => { this.generateEmail() }}>
               <div className="form__elt">
                 <label htmlFor="name">First name *</label>
-                <input require="true" onChange={(e) => { this.onChange(e) }} type="text" id="firstName" placeholder="Robert" />
+                <input require="true" onChange={(e) => { this.onChange(e) }} type="text" id="firstName" placeholder={this.state.firstName} />
               </div>
               <div className="form__elt">
                 <label htmlFor="name">Last name *</label>
@@ -106,10 +107,10 @@ class App extends Component {
           </div>
           <div className="block">
             <Template
-              firstName={this.state.firstName}
-              lastName={this.state.lastName}
-              position={this.state.position}
-              phone={this.state.phone}
+              firstName={firstName}
+              lastName={lastName}
+              position={position}
+              phone={phone}
             />
           </div>
           <div className="block">
