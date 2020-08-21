@@ -93,6 +93,7 @@ class App extends Component {
     return (
       <Fragment>
         <div className="container">
+        
           <div className="block">
             <h1>Email signature Generator</h1>
             <p>Change the information below and copy / paste the generated code</p>
@@ -114,8 +115,8 @@ class App extends Component {
                 <input require="true" onChange={(e) => { this.onChange(e) }} type="tel" id="phone" placeholder="+32456789123" />
               </div>
             </form>
-
           </div>
+
           <div className="block">
             <Template
               firstName={firstName}
@@ -124,10 +125,12 @@ class App extends Component {
               phone={phone}
             />
           </div>
+
           <div className="block">
             <textarea id="generated--email" readOnly placeholder="Copy / paste this generated code" value={this.state.generatedEmail != null ? this.state.generatedEmail : ''} />
             <a id="copy" onClick={() => { this.copyCode() }} href="#copy">Copy</a>
           </div>
+
         </div>
       </Fragment>
     )
