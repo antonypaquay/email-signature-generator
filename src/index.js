@@ -11,7 +11,7 @@ class App extends Component {
       firstName: 'Robert',
       lastName: 'Schuman',
       position: 'Job Position',
-      phone: '+32456789123',
+      phone: '456 78 91 23',
       generatedEmail: null
     }
   }
@@ -34,10 +34,9 @@ class App extends Component {
     }
   }
 
-  onChange(e) {
-    const fieldText = e.target.value;
-    const fieldId = e.target.id;
-
+  handleChange(e) {
+    let fieldText = e.currentTarget.value;
+    let fieldId = e.currentTarget.id;
     switch(fieldId) {
       case 'firstName':
         this.setState({
@@ -77,6 +76,7 @@ class App extends Component {
   }
 
   copyCode() {
+    this.generateEmail();
     const copyEmailCode = document.getElementById('generated--email'),
           copyBtn = document.querySelector('#copy');
 
@@ -95,24 +95,24 @@ class App extends Component {
         <div className="container">
         
           <div className="block">
-            <h1>Email signature Generator</h1>
+            <h1>SeekandCare - Email signature</h1>
             <p>Change the information below and copy / paste the generated code</p>
-            <form autoComplete="off" onChange={() => { this.generateEmail() }}>
+            <form autoComplete="off">
               <div className="form__elt">
                 <label htmlFor="name">First name *</label>
-                <input require="true" onChange={(e) => { this.onChange(e) }} type="text" id="firstName" placeholder={this.state.firstName} />
+                <input require="true" onChange={(e) => this.handleChange(e)} type="text" id="firstName" value={firstName} placeholder="Robert" />
               </div>
               <div className="form__elt">
                 <label htmlFor="name">Last name *</label>
-                <input require="true" onChange={(e) => { this.onChange(e) }} type="text" id="lastName" placeholder="Schuman" />
+                <input require="true" onChange={(e) => this.handleChange(e)} type="text" id="lastName" value={lastName} placeholder="Schuman" />
               </div>
               <div className="form__elt">
                 <label htmlFor="position">Position *</label>
-                <input require="true" onChange={(e) => { this.onChange(e) }} type="text" id="position" placeholder="Job position" />
+                <input require="true" onChange={(e) => this.handleChange(e)} type="text" id="position" value={position} placeholder="Job position" />
               </div>
               <div className="form__elt">
                 <label htmlFor="phone">Phone number *</label>
-                <input require="true" onChange={(e) => { this.onChange(e) }} type="tel" id="phone" placeholder="+32456789123" />
+                <input require="true" onChange={(e) => this.handleChange(e)} type="tel" id="phone" value={phone} placeholder="456789123" />
               </div>
             </form>
           </div>
@@ -128,7 +128,7 @@ class App extends Component {
 
           <div className="block">
             <textarea id="generated--email" readOnly placeholder="Copy / paste this generated code" value={this.state.generatedEmail != null ? this.state.generatedEmail : ''} />
-            <a id="copy" onClick={() => { this.copyCode() }} href="#copy">Copy</a>
+            <a id="copy" onClick={() => { this.copyCode() }} href="#copy">Generate signature</a>
           </div>
 
         </div>
