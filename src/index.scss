@@ -1,138 +1,110 @@
-$blue: #3791eb;
-$blue-pastel: #d1deff;
-$green: #58cdaa;
-$green-pastel: #cdf0e4;
-
-// Gray levels
-$gray-1:  #283e76;
-$gray-2: #78787f;
-$gray-3: #a5a5ad;
-
-// White levels
-$white-1: #f2f3f6;
-$white-2: #feffff;
-$white-3: #dae1e7;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  font-family: "Rubik", "Arial", sans-serif;
-  margin: 0;
-  color: $gray-2;
-  background-color: $white-1;
+  font-family: "Poppins", "Arial", sans-serif;
+  background-color: #ffffff;
+  color: #061f38;
+}
+
+.logo {
+  display: block;
+  width: 32px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.title {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+}
+
+.notice {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  text-align: center;
+  color: #445775;
 }
 
 .container {
-  width: 92%;
+  width: 96%;
+  max-width: 600px;
   margin: 0 auto;
-  max-width: 1280px;
-  display: flex;
-  flex-direction: column;
+  padding: 88px 0;
   .block {
-    background-color:  $white-2;
-    border-radius: 6px;
-    width: 100%;
-    height: 25vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 15px 40px rgba(166, 173, 201, 0.2);
+    padding: 32px 24px;
     margin-top: 24px;
-    position: relative;
-    .email {
-      width: 80%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    textarea {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    #copy {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      background-color: $blue-pastel;
-      color: $blue;
-      padding: 8px;
-      font-size: 0.875rem;
-      border-top-left-radius: 2px;
-      text-decoration: none;
-      transition: all .3s ease-in-out;
-      &:hover, &:focus {
-        background-color: $gray-1;
-        color: $white-1;
-      }
-    }
-    &:first-child {
-      width: calc(100% - 32px);
-      height: auto;
-      background-color: $white-2;
-      padding: 16px;
-    }
-    &:last-child {
-      overflow: hidden;
-      padding: 8px;
-      width: calc(100% - 16px);
-      height: calc(25vh - 16px);
+  }
+  #copy {
+    display: inline-block;
+    width: 100%;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 12px 16px;
+    margin-top: 24px;
+    line-height: 22px;
+    border: 0;
+    background-color: #061f38;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background-color: #136bc2;
     }
   }
-  @media (min-width: 956px) {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-
-    .block {
-      width: calc(50% - 20px);
-      margin-top: 0;
-      height: 30vh;
-      &:first-child {
-        margin-bottom: 32px;
-      }
-      &:last-child {
-        width: calc(50% - 16px);
-        height: calc(30vh - 16px);
-      }
-    }
-  }
-}
-
-h1 {
-  color: $gray-1;
-  font-size: 1.625rem;
-  margin: 0;
-}
-
-p {
-  font-size: 0.875rem;
-  margin: 0;
-  margin: 8px 0 16px;
 }
 
 form {
-  width: 100%;
+  width: calc(100% - 32px);
   .form__elt {
-    display: block;
-    float: left;
-    margin-right: 8px;
+    position: relative;
+    margin: 0 0 24px;
+    &:last-child {
+      margin-bottom: 0;
+    }
     ::placeholder {
-      opacity: 0.5;
+      color: rgba(#818fb1, 0.5);
+      font-weight: 400;
     }
     label {
       display: block;
-      font-size: 0.6875rem;
-      margin-bottom: 4px;
+      font-size: 0.694rem;
+      font-weight: 600;
+      color: #061f38;
+      margin-bottom: 8px;
     }
-    input[type="text"],
-    input[type="tel"] {
-      padding: 8px 12px;
+    input {
       display: block;
-      border: 2px solid $white-3;
-      border-radius: 2px;
+      position: relative;
+      width: 100%;
+      font-family: "Poppins", "Arial", sans-serif;
+      font-weight: 600;
+      color: #061f38;
+      background-color: transparent;
+      border: 1px solid #eef1f8;
+      border-radius: 10px;
+      appearance: none;
+      outline: none;
+      padding: 11px 16px;
+      font-size: 0.875rem;
+      line-height: 22px;
+      &:focus {
+        background-color: #FFF;
+        border-color: #061f38;
+        box-shadow: none;
+      }
     }
   }
 }

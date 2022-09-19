@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import Logo from './assets/img/logo.png';
 import Template from './Template';
 
 class App extends Component {
@@ -8,36 +9,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: 'Robert',
-      lastName: 'Schuman',
-      position: 'Job Position',
-      phone: '456 78 91 23',
-      generatedEmail: null
-    }
-  }
-
-  componentDidMount() {
-    const getFirstName = localStorage.getItem('firstName');
-    const getLastName = localStorage.getItem('lastName');
-    const getPosition = localStorage.getItem('position');
-    const getPhone = localStorage.getItem('phone');
-    const getGenerateEmail = localStorage.getItem('generatedEmail');
-
-    if (getGenerateEmail) {
-      this.setState({
-        firstName: getFirstName !== null ? getFirstName : this.state.firstName,
-        lastName: getLastName !== null ? getLastName : this.state.lastName,
-        position: getPosition !== null ? getPosition : this.state.position,
-        phone: getPhone !== null ? getPhone : this.state.phone,
-        generatedEmail: getGenerateEmail
-      })
+      firstName: '',
+      lastName: '',
+      position: '',
+      phone: '',
+      btnText: 'Copy'
     }
   }
 
   handleChange(e) {
     let fieldText = e.currentTarget.value;
     let fieldId = e.currentTarget.id;
-    switch(fieldId) {
+    switch (fieldId) {
       case 'firstName':
         this.setState({
           firstName: fieldText
@@ -48,89 +31,80 @@ class App extends Component {
           lastName: fieldText
         })
         break;
-      case 'position': 
+      case 'position':
         this.setState({
           position: fieldText
         })
         break;
-      case 'phone': 
+      case 'phone':
         this.setState({
           phone: fieldText
         })
         break;
       default:
-        this.setState({
-          phone: fieldText
-        })
         break;
     }
-    localStorage.setItem(fieldId, fieldText);
   }
 
-  generateEmail() {
-    const generatedEmail = document.getElementsByClassName('email')[0].innerHTML;
-    this.setState({
-      generatedEmail
-    })
-    localStorage.setItem('generatedEmail', generatedEmail);
-  }
 
   copyCode() {
-    this.generateEmail();
-    const copyEmailCode = document.getElementById('generated--email'),
-          copyBtn = document.querySelector('#copy');
 
-    if(copyEmailCode.value !== ''){
-      copyEmailCode.select();
-      copyEmailCode.setSelectionRange(0, 99999);
-      document.execCommand("copy", false);
-      copyBtn.innerHTML = 'Copied!';
+    this.setState({
+      btnText: 'Copied!'
+    });
+
+    const selection = window.getSelection();
+    const template = document.querySelector('#snc-template');
+
+    if (selection.rangeCount > 0) {
+      selection.removeAllRanges();
     }
+
+    const range = document.createRange();
+    range.selectNode(template);
+    selection.addRange(range);
+
+    // Execute 'copy', can't 'cut' in this case
+    document.execCommand('copy');
   }
 
   render() {
-    const {firstName, lastName, position, phone} = this.state;
+    const { firstName, lastName, position, phone, btnText } = this.state;
     return (
       <Fragment>
         <div className="container">
-        
+          <img className="logo" src={Logo} alt="logo SNC" />
+          <h1 className="title">Email Signature</h1>
+          <p className="notice">Change the information below and copy / paste your signature</p>
           <div className="block">
-            <h1>SeekandCare - Email signature</h1>
-            <p>Change the information below and copy / paste the generated code</p>
             <form autoComplete="off">
               <div className="form__elt">
-                <label htmlFor="name">First name *</label>
+                <label htmlFor="name">First name*</label>
                 <input require="true" onChange={(e) => this.handleChange(e)} type="text" id="firstName" value={firstName} placeholder="Robert" />
               </div>
               <div className="form__elt">
-                <label htmlFor="name">Last name *</label>
+                <label htmlFor="name">Last name*</label>
                 <input require="true" onChange={(e) => this.handleChange(e)} type="text" id="lastName" value={lastName} placeholder="Schuman" />
               </div>
               <div className="form__elt">
-                <label htmlFor="position">Position *</label>
-                <input require="true" onChange={(e) => this.handleChange(e)} type="text" id="position" value={position} placeholder="Job position" />
+                <label htmlFor="position">Position*</label>
+                <input require="true" onChange={(e) => this.handleChange(e)} type="text" id="position" value={position} placeholder="Business Developer" />
               </div>
               <div className="form__elt">
-                <label htmlFor="phone">Phone number *</label>
-                <input require="true" onChange={(e) => this.handleChange(e)} type="tel" id="phone" value={phone} placeholder="456789123" />
+                <label htmlFor="phone">Phone number*</label>
+                <input require="true" onChange={(e) => this.handleChange(e)} type="tel" id="phone" value={phone} placeholder="+32 (0)471 23 45 67" />
               </div>
             </form>
           </div>
-
-          <div className="block">
+          <div className="block block--template">
             <Template
-              firstName={firstName}
-              lastName={lastName}
-              position={position}
-              phone={phone}
+              firstName={firstName.length > 0 ? firstName : 'Robert'}
+              lastName={lastName.length > 0 ? lastName : 'Schuman'}
+              position={position.length > 0 ? position : 'Business Developer'}
+              phone={phone.length > 0 ? phone : '+32 (0)471 23 45 67'}
             />
           </div>
-
-          <div className="block">
-            <textarea id="generated--email" readOnly placeholder="Copy / paste this generated code" value={this.state.generatedEmail != null ? this.state.generatedEmail : ''} />
-            <a id="copy" onClick={() => { this.copyCode() }} href="#copy">Generate signature</a>
-          </div>
-
+          <button id="copy" onClick={() => { this.copyCode() }}>{btnText}</button>
         </div>
       </Fragment>
     )
